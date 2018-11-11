@@ -1,0 +1,121 @@
+#utilities-manage {
+  /* border: 1px solid; */
+}
+/* 标题 */
+#utilities-manage h1.title {
+  margin:30px 0;
+  font-size:3.5rem;
+  font-weight: 600;
+  color:#0084ff;
+  text-align: center;
+}
+/* 费用选项 */
+#utilities-manage ul.cost-category {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+}
+#utilities-manage ul.cost-category>li{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin:0 20px;
+  width: 50px;
+  height: 50px;
+  background: #adadad;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all .2s linear;
+}
+#utilities-manage ul.cost-category>li i {
+  font-size: 3.2rem;
+  color: #fff;
+}
+#utilities-manage ul.cost-category>li:hover, #utilities-manage ul.cost-category>li.active{
+  background: #0077e6;
+}
+
+/* 主体 */
+#utilities-manage .utilities-manage--main{
+  margin: 0 auto;
+  padding: 0 10px;
+  margin-top: 30px;
+  width: 100%;
+}
+#utilities-manage .utilities-manage--main .utilities-manage--main__operation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10px;
+}
+/* 主体的一些操作 */
+#utilities-manage .utilities-manage--main .utilities-manage--main__operation-button{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+/* 表格 */
+#utilities-manage .utilities-manage--main .utilities-manage--main__table {
+  margin: 10px 0;
+}
+/* 表格分页 */
+#utilities-manage .utilities-manage--main .utilities-manage--main__table .utilities-manage--main__table-pagination {
+  display: flex;
+  justify-content: flex-end;
+}
+/* 上传组件 */
+.utilities-manage--main__upload-dialog {
+  width: 400px;
+}
+.utilities-manage--main__upload-upload {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+.utilities-manage--main__upload-upload .el-upload {
+  width: 100%;
+}
+.utilities-manage--main__upload-upload .el-upload-dragger {
+  width: 100%;
+}
+/* 搜索 */
+.utilities-manage--main__search .utilities-manage--main__search-dialog{
+  width: 510px;
+}
+
+/* 覆盖输入框css */
+#utilities-manage .utilities-manage--main .utilities-manage--main__table .el-input__inner {
+  padding: 0 !important;
+  text-align: center !important;
+  box-shadow: 0 0 3px rgba(0, 0, 0, .2) inset;
+}
+/* 圆形的搜索按钮 */
+.utilities-manage__search-button::before {
+  color: #0077e6 !important;
+}
+/* 表单每一项都垂直居中 */
+.el-radio-group {
+  margin-top: 5px;
+}
+/* 隐藏文件上传按钮 */
+input.el-upload__input {
+  display: none;
+}
+/* 表格错位 */
+body .el-table th.gutter{
+  display: table-cell!important;
+}
+
+/* 批量删除按钮的动画 */
+.fade-enter-active, .fade-leave-active {
+  transition: all .2s linear;
+}
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+}
+.fade-leave, .fade-enter-to {
+  opacity: 1;
+}

@@ -1,0 +1,16 @@
+@media only screen and (max-width: 520px) {
+  /* 标题 */
+  #utilities h1.title { margin: 15px 0;font-size:2.5rem; }
+  /* 主体 */
+  #utilities .utilities--main{ width: 96%; }
+  /* 费用选项 */
+  #utilities ul.cost-category { margin-top: 10px; }
+  #utilities ul.cost-category>li{ margin: 0 10px;width: 40px; height: 40px; }
+  #utilities ul.cost-category>li i { font-size: 2.2rem; }
+  /* 主体 */
+  #utilities .utilities--main{ margin-top: 20px; }
+
+  /* 覆盖ｔｉｍｅｐｉｃｋ的ｃｓｓ */
+  .el-input__inner {padding-right: 10px!important;}
+  .el-message {min-width: 100%!important;}
+}

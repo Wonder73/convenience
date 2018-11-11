@@ -1,0 +1,73 @@
+#utilities {
+  /* border: 1px solid; */
+}
+/* 标题 */
+#utilities h1.title {
+  margin:30px 0;
+  font-size:3.5rem;
+  font-weight: 600;
+  color:#0084ff;
+  text-align: center;
+}
+/* 费用选项 */
+#utilities ul.cost-category {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+}
+#utilities ul.cost-category>li{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin:0 20px;
+  width: 50px;
+  height: 50px;
+  background: #adadad;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all .2s linear;
+}
+#utilities ul.cost-category>li i {
+  font-size: 3.2rem;
+  color: #fff;
+}
+#utilities ul.cost-category>li:hover, #utilities ul.cost-category>li.active{
+  background: #0077e6;
+}
+
+/* 主体 */
+#utilities .utilities--main{
+  margin: 0 auto;
+  margin-top: 30px;
+  width: 500px;
+  overflow: hidden;
+}
+/* 查询结果 */
+#utilities .utilities--main .utilities--main__search-result {
+  padding: 10px 0;
+  border-bottom: 1px dashed #666;
+}
+#utilities .utilities--main .utilities--main__search-result:last-child {
+  border-bottom: none;
+}
+#utilities .utilities--main .utilities--main__search-result span{
+  padding: 5px 0;
+  font-size: 14px;
+}
+#utilities .utilities--main .utilities--main__search-result span:first-child{
+  text-align: right;
+}
+
+/* aa支付 */
+#utilities .utilities--main .utilities--main__search-aa {
+  margin: 10px 0;
+}
+#utilities .utilities--main .utilities--main__search-aa span{
+  padding: 5px 0;
+  font-size: 14px;
+  text-align: center !important;
+}
+#utilities .utilities--main .utilities--main__search-aa input{
+  text-align: center;
+}

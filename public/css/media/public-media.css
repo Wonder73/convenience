@@ -1,0 +1,7 @@
+@media only screen and (max-width:440px){
+
+  /*登录和注册框的自适应*/
+  .log_rg{width:100%;}
+  .login form,.register form{width:95%;}
+  .username_box,.password_box,.confirm_password,.email_validate,.validate_box{width:98% !important;}
+}

@@ -1,0 +1,25 @@
+@media only screen and (max-width: 520px) {
+  /* 标题 */
+  #utilities-manage h1.title { margin: 15px 0;font-size:2.5rem; }
+  /* 主体 */
+  #utilities-manage .utilities-manage--main{ width: 96%; }
+  /* 费用选项 */
+  #utilities-manage ul.cost-category { margin-top: 10px; }
+  #utilities-manage ul.cost-category>li{ margin: 0 10px;width: 40px; height: 40px; }
+  #utilities-manage ul.cost-category>li i { font-size: 2.2rem; }
+  /* 主体 */
+  #utilities-manage .utilities-manage--main{ margin-top: 20px; }
+  /* 搜索 */
+  .utilities-manage--main__search .utilities-manage--main__search-dialog{width: 96%}
+
+  /* 覆盖ｔｉｍｅｐｉｃｋ的ｃｓｓ */
+  .utilities-manage--main__search .utilities-manage--main__search-dialog .el-input__inner {padding-right: 10px!important;}
+  .utilities-manage--main__search .utilities-manage--main__search-dialog .el-message {min-width: 100%!important;}
+}
+
+@media only screen and (max-width: 450px) {
+  /* 上传组件 */
+  .utilities-manage--main__upload-dialog {width: 96%;}
+  /* 搜索 */
+  .utilities-manage--main__search .utilities-manage--main__search-dialog .el-dialog__body{ padding: 10px !important; }
+}

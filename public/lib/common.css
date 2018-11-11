@@ -1,0 +1,47 @@
+/* 支付样式 */
+.pay {
+  width: 320px !important;
+}
+.pay .pay--main {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}
+.pay .pay--main>span{
+  font-size: 22px;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+.pay .pay--main>span:first-child{
+  font-size: 14px;
+  color: #bbb;
+}
+.pay .pay--main .pay--main__password {
+  display: flex;
+  margin-top: 20px;
+  padding: 10px 0;
+  width: 240px;
+  height: 40px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.pay .pay--main .pay--main__password>span {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 2px;
+  font-size: 20px;
+  text-align: center;
+  border-right: 1px solid #eee;
+}
+.pay .pay--main .pay--main__password>span:last-child {
+  border: none;
+}
+
+
+/* 响应式 */
+@media only screen and (max-width: 320px) {
+  .pay { width: 98% !important; }
+}

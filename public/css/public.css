@@ -1,0 +1,287 @@
+/* 导航条 */
+nav {
+  margin: 0 !important;
+}
+
+/*登录框和注册框*/
+.log_rg{
+  display:none;
+  position:fixed;
+  top:50%;
+  left:50%;
+	margin:0 auto;
+	text-align:center;
+	background-color:#FFFFFF;
+	width:430px;
+	border-radius:2px;
+  overflow:hidden;
+  z-index:99;
+  transform:translate(-50%,-50%);
+  box-shadow:0px 1px 3px rgba(21,21,21,.1);
+  z-index:999;
+}
+.log_rg_top{
+  margin:10px 0;
+}
+.log_rg_top h1{
+  margin:30px 0 20px 0;;
+  font-size:4rem;
+  color:#0084ff;
+  letter-spacing:10px;
+}
+.log_rg_top p{
+  font-size:2rem;
+  color:#0084ff;
+  letter-spacing:1px;
+}
+/* 表单内容 */
+.log_rg_content{
+  display:flex;
+  flex-flow:column;
+  align-items:center;
+  margin-bottom:20px;
+}
+
+.log_rg_content > form > div:not(.Login-o) {
+  position:relative;
+  overflow:hidden;
+  margin:10px 0;
+	width:350px;
+	height:48px;
+	border-bottom:1px solid #f6f6f6;
+}
+
+/* 输入框后面的提示 */
+.default_style{
+  position:absolute;
+  right:10px;
+  top:50%;
+  font-size:1.6rem;
+  color:#8590af;
+  transform:translateY(-50%);
+  cursor:pointer;
+}
+.password_box span:nth-child(2){
+  right:90px;
+}
+.password_box span:last-child,.email_validate span:last-child{
+  font-size:1.5rem;
+  color:#0085ff;
+}
+.password_box span:hover{
+  color:#8590af;
+}
+.validate_box span:nth-child(2), .email_validate span:nth-child(2){
+  right: 120px;
+}
+
+div[class*="password"] span:nth-child(2){
+  right:30px;
+}
+
+/* 验证码 */
+.validate_box {
+  display: none;
+  overflow: visible!important;
+}
+.validate_box span:last-child:hover::before, .validate_box span:last-child:hover::after{
+  visibility: visible;
+  opacity: 1;
+  transition: opacity .2s linear;
+}
+.validate_box span:last-child::before {
+  visibility: hidden;
+  content: '看不清?换一张';
+  position: absolute;
+  top: -70%; left: -5%;
+  padding: 6px 2px;
+  width: 110px;
+  font-size: 1.2rem;
+  color: #eee;
+  background: #333;
+  border-radius: 4px;
+  z-index: 299;
+  opacity: 0;
+}
+.validate_box span:last-child::after {
+  visibility: hidden;
+  position: absolute;
+  top: 0; left: 50%;
+  content: ' ';
+  width: 0; 
+  height: 0;
+  border: 8px solid transparent;
+  border-top:8px solid #333;
+  transform: translate(-50%, -28.5%);
+  opacity: 0;
+}
+
+@keyframes myOpacity {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+
+
+/* 输入表单 */
+.log_rg input[type="text"],.log_rg input[type="password"]{
+  -webkit-box-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  padding:5px 0;
+  overflow: hidden;
+  font-size: 1.4rem;
+  border: none;
+  outline: none;
+  resize: none;
+	width: 100%;
+	height: 100%;
+}
+
+/* 登录 */
+.Login-o{
+  display:flex;
+  justify-content:space-between;
+	margin: 20px 0 0 0;
+}
+.Login-o span{
+  font-size:1.4rem;
+  color:#8590af;
+  cursor:pointer;
+}
+.Login-o span:first-child{
+  color:#0084ff;
+  transition:all .2s linear;
+}
+.Login-o span:first-child:hover{
+  color:#8590af;
+}
+
+/* 注册*/
+.register_content{
+  margin-bottom:30px;
+}
+.register_content ul{
+  display:flex;
+  justify-content:space-around;
+  flex-wrap:wrap;
+  margin:10px 0;
+  width:350px;
+}
+.register_content ul li{
+  position: relative;
+  display: inline-block;
+  flex-shrink:0;
+  height: 30px;
+  margin:5px 0;
+  padding: 0 12px;
+  margin-right:5px;
+  font-size: 1.4rem;
+  line-height: 30px;
+  color: #0084ff;
+  vertical-align: top;
+  border-radius: 90px;
+  background: rgba(0,132,255,.1);
+  cursor:pointer;
+  transition:all .2s linear;
+}
+.register_content ul li.selected{
+  border-color:#259;
+  background:#259;
+  color:#fff;
+}
+
+.register_content p{
+  margin-top:15px;
+  font-size:1.4rem;
+  color:#8590af;
+}
+.register_content p a{
+  font-size:1.4rem;
+  color:#8590af;
+  text-decoration:none;
+  transition:all .2s linear;
+}
+.register_content p a:hover{
+  color:#777;
+}
+
+/* 登录注册按钮 */
+.log_rg-button{
+  display: inline-block;
+  margin-top: 20px;
+  padding: 0 16px;
+  width: 100%;
+  height: 40px;
+  font-size: 14px;
+  color: #fff;
+  text-align: center;
+  cursor: pointer;
+  background-color: #0084ff;
+  border: 1px solid;
+  border-radius: 3px;
+}
+/* 登录注册尾部 */
+.log_rg_foot {
+  padding:20px 0;
+	background-color:#f6f6f6;
+  font-size:1.5rem;
+}
+.log_rg_foot span{
+  font-size:1.5rem;
+  color:#0084ff;
+  cursor:pointer;
+}
+
+/*关闭*/
+.log_rg div.close{
+  position:absolute;
+  top:15px;
+  right:15px;
+  transition:all .2s linear;
+}
+.log_rg div.close:hover{
+  transform:rotate(180deg);
+}
+
+
+/*登录或注册错误*/
+span.error{
+  color:#f1403c !important;
+  font-size:1.4rem !important;
+  cursor:default !important;
+}
+.error{
+  color:#f1403c;
+}
+
+/*阴影部分*/
+div.shadow{
+  position:fixed;
+  left: 0;
+  top:-56px;
+  width:100%;
+  height:120%;
+  background:rgba(0,0,0,.4);
+  z-index:998;
+  display:none;
+}
+
+
+/* 重置element css */
+.el-button span, .el-button span i{
+  font-size: 14px !important;
+  color: #fff !important;
+}
+.el-button--default span {
+  color: #999 !important;
+}
+.el-button--default:hover span {
+  color: #409EFF !important;
+}
+.el-button--primary span {
+  color: #fff !important;
+}
+.el-button--primary:hover span {
+  color: #fff !important;
+}
