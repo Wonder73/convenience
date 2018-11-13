@@ -104,7 +104,6 @@ $(function (){
 
       //启动编辑
       openEdit (index) {
-        console.log(index);
         this.$confirm('此操作将会开启编辑，是否继续?', '开启标记', {
           confirmButtonText: '继续',
           cancelButtonText: '取消',

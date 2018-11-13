@@ -87,4 +87,24 @@ Route::group(['prefix' => '', 'namespace' => 'Client'], function (){
 Route::group(['prefix' => 'yb-admin', 'namespace' => 'Admin'], function (){
     Route::get('', 'IndexController@index');
     Route::get('welcome', 'IndexController@welcome');
+    //电费管理
+    Route::group(['prefix' => 'electricity-manage', 'namespace' => 'Utilities'], function (){
+        Route::get('', 'ElectricityManageController@index');
+    });
+    //水费管理
+    Route::group(['prefix' => 'water-manage', 'namespace' => 'Utilities'], function (){
+        Route::get('', 'WaterManageController@index');
+    });
+    //应用管理
+    Route::group(['prefix' => 'app-manage'], function (){
+        Route::get('', 'AppController@index');
+        //获取角色列表
+        Route::post('getRole', 'AppController@getRole');
+        //添加应用
+        Route::post('addUploadApp', 'AppController@addUploadApp');
+        //应用列表
+        Route::post('getData', 'AppController@getData');
+        //删除
+        Route::post('deleteData', 'AppController@deleteData');
+    });
 });

@@ -9,8 +9,8 @@
 </head>
 <body>
   @include('client\header')
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/element-ui/2.4.7/theme-chalk/index.css" rel="stylesheet">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/element-ui/2.4.7/index.js"></script>
+  <link href="{{asset('lib/element-ui/lib/theme-chalk/index.css')}}" rel="stylesheet">
+  <script src="{{asset('lib/element-ui/lib/index.js')}}"></script>
   <script src="{{asset('utilities-static\js\utilities.js')}}"></script>
   <link rel="stylesheet" href="{{asset('utilities-static\css\utilities.css')}}" />
   <link rel="stylesheet" href="{{asset('utilities-static\css\utilities-media.css')}}" />

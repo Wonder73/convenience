@@ -93,6 +93,8 @@ Common.prototype.ajax = function (obj) {
       url: this.rootURL + '/' + obj.url,
       data: obj.data,
       dataType: 'json',
+      processData : obj.processData,
+      contentType : obj.contentType,
       success: function (response){
         resolve(response);
       },
