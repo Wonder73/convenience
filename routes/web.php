@@ -130,6 +130,8 @@ Route::group(['prefix' => '', 'namespace' => 'Client'], function (){
 Route::group(['prefix' => 'yb-admin', 'namespace' => 'Admin'], function (){
     Route::get('', 'IndexController@index');
     Route::get('welcome', 'IndexController@welcome');
+	Route::get('userlist', 'admin\IndexController@userlist');
+    Route::post('userdel', 'admin\IndexController@userdel');
 	
     //电费管理
     Route::group(['prefix' => 'electricity-manage', 'namespace' => 'Utilities'], function (){

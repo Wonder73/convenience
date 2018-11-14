@@ -23,9 +23,7 @@
 </head>
 <body>
 <div class="page-container">
-	<p class="f-20 text-success">欢迎使用H-ui.admin <span class="f-14">v3.1</span>后台模版！</p>
-	<p>登录次数：18 </p>
-	<p>上次登录IP：222.35.131.79.1  上次登录时间：2014-6-14 11:19:55</p>
+	<p class="f-20 text-success">欢迎使用优便校园后台管理系统<span class="f-14">v3.1</span></p>
 	<table class="table table-border table-bordered table-bg">
 		<thead>
 			<tr>
@@ -43,11 +41,11 @@
 		<tbody>
 			<tr class="text-c">
 				<td>总数</td>
-				<td>92</td>
-				<td>9</td>
 				<td>0</td>
-				<td>8</td>
-				<td>20</td>
+				<td>0</td>
+				<td>0</td>
+				<td>0</td>
+				<td>0</td>
 			</tr>
 			<tr class="text-c">
 				<td>今日</td>
@@ -67,7 +65,7 @@
 			</tr>
 			<tr class="text-c">
 				<td>本周</td>
-				<td>2</td>
+				<td>0</td>
 				<td>0</td>
 				<td>0</td>
 				<td>0</td>
@@ -75,7 +73,7 @@
 			</tr>
 			<tr class="text-c">
 				<td>本月</td>
-				<td>2</td>
+				<td>0</td>
 				<td>0</td>
 				<td>0</td>
 				<td>0</td>
