@@ -8,6 +8,8 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Http\Models\Client\Index\User;
 use App\Http\Models\Client\Index\UserInfo;
+use App\Http\Models\Admin\AppManage\App;
+use App\Http\Models\Client\Index\UserIdentity;
 use Mail;
 
 //登录和注册控制器
@@ -36,7 +38,12 @@ class LoginRegController extends Controller
 
     //获取热门应用
     public function getHotApp(Request $request) {
-        return '[{"id": 1, "name": "水电费"}, {"id": 2, "name": "水电费"}, {"id": 3, "name": "水电费"}, {"id": 4, "name": "水电费"}, {"id": 5, "name": "水电费"}, {"id": 6, "name": "书籍共享"}]';
+
+        $res = App::where([
+            ['app_permission', 'like', '%2%'],
+          ]) -> select('id', 'app_name as name') -> limit(10) -> offset(0) -> orderBy('id', 'desc') -> get();
+
+        return $res;
     }
 
     //完成注册
@@ -52,6 +59,10 @@ class LoginRegController extends Controller
         //往用户信息表插入数据
         $userInfo = ['user_id' => $res -> id, 'app' => $info['hotApp']];
         $res = UserInfo::create($userInfo);
+
+        //往用户权限变插入数据
+        $UserIdentity = ['user_id' => $res -> id, 'role_id' => 1, 'check' => 0];
+        $res = UserIdentity::create($UserIdentity);
         
         //判断输出
         if($res) {
@@ -70,10 +81,12 @@ class LoginRegController extends Controller
     //用户邮箱登录
     public function emailLogin(Request $request){
         $info = $request -> all();
-        $res = User::with('user_identity')->where('email', $info['email']) -> get() -> toArray();
+        $res = User::with('user_identity')->with(['user_info' => function ($query){
+            $query -> select('user_id', 'app');
+        }])->where('email', $info['email']) -> get() -> toArray();
 
         if($res) {
-            return '{"id": "'. $res[0]['id'] .'", "username": "'. $res[0]['username'] .'", "password": "'. $res[0]['password'] .'", "user_identity": '. json_encode($res[0]['user_identity']) .'}';
+            return '{"id": "'. $res[0]['id'] .'", "username": "'. $res[0]['username'] .'", "password": "'. $res[0]['password'] .'", "user_identity": '. json_encode($res[0]['user_identity']) .', "user_app": '. json_encode($res[0]['user_info']['app']) .'}';
         }else{
             return 1;
         }
@@ -94,11 +107,13 @@ class LoginRegController extends Controller
 
     //判断数据库中是否有该用户
     private function checkUser($info){
-        $res = User::with('user_identity')->where('username', $info['username']) -> get() -> toArray();
+        $res = User::with('user_identity')->with(['user_info' => function ($query){
+            $query -> select('user_id', 'app');
+        }])->where('username', $info['username']) -> get() -> toArray();
         
         if($res) {
             if($res[0]['username'] == $info['username'] && ($res[0]['password'] == md5($info['password'] . $res[0]['salt']) || $res[0]['password'] == $info['password'])){
-                return '{"id": "'. $res[0]['id'] .'", "username": "'. $info['username'] .'", "password": "'. $info['password'] .'", "user_identity": '. json_encode($res[0]['user_identity']) .'}';
+                return '{"id": "'. $res[0]['id'] .'", "username": "'. $info['username'] .'", "password": "'. $info['password'] .'", "user_identity": '. json_encode($res[0]['user_identity']) .', "user_app": '. json_encode($res[0]['user_info']['app']) .'}';
             }else{
                 return 2;
             }

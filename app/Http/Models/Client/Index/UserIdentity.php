@@ -8,7 +8,7 @@ class UserIdentity extends Model
 {
     protected $table = 'user_identity';
     protected $primarykey = 'id';
-    protected $fillable = [];
+    protected $fillable = ['user_id', 'role_id', 'check'];
     public $timestamps = false;
 
     public function user (){

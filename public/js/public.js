@@ -13,6 +13,7 @@ $(function (){
     userInfo = JSON.parse(userInfo);
 
     $.ajax({
+      async: false,
       type: 'post',
       url: common.rootURL + '/login/checkLogin',
       data: {
@@ -200,6 +201,7 @@ $(function (){
               if(typeof responseText == 'string'){
                 data = JSON.parse(data);
               }
+
               for(let value of data){
                 html += '<li app-id="'+ value.id +'">'+ value.name +'</li>';
               }
