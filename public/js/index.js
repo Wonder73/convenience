@@ -3,6 +3,7 @@ $(function (){
     'interval': false,
   });
 
+
   const vm = new Vue({
     el: '.container',
     delimiters:['${', '}'],
@@ -43,6 +44,11 @@ $(function (){
       }
     },
     methods: {
+      //显示登录框
+      showLogin (){
+        $('.login').fadeIn(300);
+        $('.shadow').fadeIn(300);
+      },
       //处理显示添加app
       handleShowAddApp (){
         this.showAddApp = true;

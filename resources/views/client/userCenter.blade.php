@@ -17,12 +17,12 @@ and open the template in the editor.
     <link href="{{asset('css/font-awesome.css')}}" rel="stylesheet" type="text/css">
     <link href="{{asset('css/font-awesome.min.css')}}" rel="stylesheet" type="text/css">
     <link href="{{asset('lib/element-ui/lib/theme-chalk/index.css')}}" rel="stylesheet">
-    
+
     <script src="{{asset('lib/common.js')}}"></script>
     <script type="text/javascript">
         let common = new Common();
         common.token = '{{csrf_token()}}'; //获取token;
-        </script>
+    </script>
     <script src="{{asset('js/jquery.min.js')}}"></script>
     <script src="{{asset('js/jquery.cookie.js')}}"></script>
     <script type="text/javascript" src="{{asset('js/bootstrap.min.js')}}"></script>
@@ -31,7 +31,7 @@ and open the template in the editor.
     <script src="{{asset('lib/element-ui/lib/index.js')}}"></script>
     <link href="{{asset('css/userCenter.css')}}" rel="stylesheet" type="text/css">
     <script type="text/javascript" src="{{asset('js/userCenter.js')}}"></script>
-    
+
     <style>
         .hid{display: none;}
         </style>
@@ -60,12 +60,12 @@ and open the template in the editor.
             </table>
         </div>
         <div class="programa col-md-12 col-xs-12" style="padding: 0;">
-            <ul class="programa col-md-12 col-xs-12" style="padding: 0;">
-                <li class="col-md-4 col-xs-4" onclick="show(1)" id="bg1" onmouseover="back(1)">个人信息</li>
-                <li class="col-md-2 col-xs-2" onclick="show(2)" id="bg2" onmouseover="back(2)">用户身份</li>
-                <li class="col-md-2 col-xs-2" onclick="show(3)" id="bg3" onmouseover="back(3)">余额</li>
-                <li class="col-md-2 col-xs-2" onclick="show(4)" id="bg4" onmouseover="back(4)">文章</li>
-                <li class="col-md-2 col-xs-2" onclick="show(5)" id="bg5" onmouseover="back(5)">设置</li>
+            <ul class="programa col-md-12 col-xs-12 header-nav" style="padding: 0;">
+                <li class="col-md-4 col-xs-4 active" onclick="show(1)" id="bg1">个人信息</li>
+                <li class="col-md-2 col-xs-2" onclick="show(2)" id="bg2">用户身份</li>
+                <li class="col-md-2 col-xs-2" onclick="show(3)" id="bg3">余额</li>
+                <li class="col-md-2 col-xs-2" onclick="show(4)" id="bg4">文章</li>
+                <li class="col-md-2 col-xs-2" onclick="show(5)" id="bg5">设置</li>
             </ul>
         </div>
         <script type="text/javascript">
@@ -79,7 +79,11 @@ and open the template in the editor.
                 }
                 i = f;
                 obj = document.getElementById("a" + i);
-                obj.style.display = "block";
+                if (f != 5) {
+                    obj.style.display = "block";
+                } else {
+                    obj.style.display = "flex";
+                }
                 bg = document.getElementById("bg" + i);
                 bg.style.background = "rgba(0, 0, 32, 0.2)";
                 bg.style.color = "#fff";
@@ -238,7 +242,7 @@ and open the template in the editor.
 
         </div><!-- /.modal -->
     </div>
-    <div class="article_a col-md-10 col-xs-12 col-md-offset-1" style="margin-top: 15px;" id="a2">
+    <div class="article_a col-md-10 col-xs-12 col-md-offset-1 hid" style="margin-top: 15px;" id="a2">
         <table class="table table-striped table-hover">
             <tbody>
 
@@ -329,80 +333,129 @@ and open the template in the editor.
 
         </div><!-- /.modal -->
     </div>
-    <div class="col-md-10 col-xs-12 col-md-offset-1" style="margin-top: 15px;" id="a3">
-      <div class="yue">
-        <p>我的余额</p>
-        <h1>${money | moneyFormat}</h1>
-        <el-button type="primary" style="width: 100%;" @click="topUp = true">充值</el-button>
-        <el-button width="100%" style="width: 100%;">提现</el-button>
-        <p class="pay-detail" @click="showPayDetail">零钱明细</p>
+    <div class="col-md-10 col-xs-12 col-md-offset-1 hid" style="margin-top: 15px;" id="a3">
+        <div class="yue">
+            <p>我的余额</p>
+            <h1>${money | moneyFormat}</h1>
+            <el-button type="primary" style="width: 100%;" @click="topUp = true">充值</el-button>
+            <el-button width="100%" style="width: 100%;">提现</el-button>
+            <p class="pay-detail" @click="showPayDetail">零钱明细</p>
 
-        <div class="pay">
-          <el-dialog
-            custom-class = "pay"
-            title = "输入金额"
-            :visible.sync = "topUp"
-            center
-          > 
-            <div class="pay--main">
-              <span>${pay.type == 0? '充值': pay.type == 1? '提现': '充值'}</span>
-              <div class="pay--main__money">
-                <el-input type="number" autofocus="autofocus" v-model="pay.cost" @keyup.enter="showPay"></el-input>
-                <el-button type="primary" @click="showPay">充值</el-button>
-              </div>
-            </div>
-          </el-dialog>
-        </div>
-
-        <div class="pay">
-          <el-dialog
-            custom-class = "pay"
-            title = "请输入支付密码"
-            :visible.sync = "pay.visible"
-            center
-          > 
-            <div class="pay--main">
-              <span>${pay.type == 0? '充值': pay.type == 1? '提现': '充值'}</span>
-              <span>${pay.cost | moneyFormat}</span>
-              <div class="pay--main__password" @click="handleClick">
-                <span>${(payPassword.length > 0? '●': null)}</span>
-                <span>${(payPassword.length > 1? '●': null)}</span>
-                <span>${(payPassword.length > 2? '●': null)}</span>
-                <span>${(payPassword.length > 3? '●': null)}</span>
-                <span>${(payPassword.length > 4? '●': null)}</span>
-                <span>${(payPassword.length > 5? '●': null)}</span>
-              </div>
-              <input type="number" style="opacity:0" v-model="payPassword" maxlength="6" :disabled="disabledInput" autofocus="autofocus" ref="input"/>
-            </div>
-          </el-dialog>
-        </div>
-
-        <!-- 零钱明细 -->
-        <el-dialog
-            custom-class = "pay-detail__dialog"
-            title = "零钱明细"
-            :visible.sync = "payDetail.visiable"
-            center
-        >
-            <ul class="pay-detail__dialog--list" @scroll="handleScroll($event)">
-                <li v-for="(value, index) of payDetail.dataSource" :key="index">
-                    <div class="pay-detail__dialog--list-left">
-                        <p>${value.organization}</p>
-                        <p>${value.date}</p>
+            <div class="pay">
+                <el-dialog custom-class="pay" title="输入金额" :visible.sync="topUp" center>
+                    <div class="pay--main">
+                        <span>${pay.type == 0? '充值': pay.type == 1? '提现': '充值'}</span>
+                        <div class="pay--main__money">
+                            <el-input type="number" autofocus="autofocus" v-model="pay.cost" @keyup.enter="showPay"></el-input>
+                            <el-button type="primary" @click="showPay">充值</el-button>
+                        </div>
                     </div>
-                    <div :class="{'pay-detail__dialog--list-right':true, 'income': !!value.consume_type}">${value.consume_type? '+': '-'} ${value.consume_cost}</div>
-                </li>
-            </ul>
-        </el-dialog>
-      </div>
+                </el-dialog>
+            </div>
+
+            <div class="pay">
+                <el-dialog custom-class="pay" title="请输入支付密码" :visible.sync="pay.visible" center>
+                    <div class="pay--main">
+                        <span>${pay.type == 0? '充值': pay.type == 1? '提现': '充值'}</span>
+                        <span>${pay.cost | moneyFormat}</span>
+                        <div class="pay--main__password" @click="handleClick">
+                            <span>${(payPassword.length > 0? '●': null)}</span>
+                            <span>${(payPassword.length > 1? '●': null)}</span>
+                            <span>${(payPassword.length > 2? '●': null)}</span>
+                            <span>${(payPassword.length > 3? '●': null)}</span>
+                            <span>${(payPassword.length > 4? '●': null)}</span>
+                            <span>${(payPassword.length > 5? '●': null)}</span>
+                        </div>
+                        <input type="number" style="opacity:0" v-model="payPassword" maxlength="6" :disabled="disabledInput"
+                            autofocus="autofocus" ref="input" />
+                    </div>
+                </el-dialog>
+            </div>
+
+            <!-- 零钱明细 -->
+            <el-dialog custom-class="pay-detail__dialog" title="零钱明细" :visible.sync="payDetail.visiable" center>
+                <ul class="pay-detail__dialog--list" @scroll="handleScroll($event)">
+                    <li v-for="(value, index) of payDetail.dataSource" :key="index">
+                        <div class="pay-detail__dialog--list-left">
+                            <p>${value.organization}</p>
+                            <p>${value.date}</p>
+                        </div>
+                        <div :class="{'pay-detail__dialog--list-right':true, 'income': !!value.consume_type}">${value.consume_type?
+                            '+': '-'} ${value.consume_cost}</div>
+                    </li>
+                </ul>
+            </el-dialog>
+        </div>
     </div>
-    <div class="article_a col-md-10 col-xs-12 col-md-offset-1" style="margin-top: 15px;text-align: center;line-height: 300px;"
+    <div class="article_a col-md-10 col-xs-12 col-md-offset-1 hid" style="margin-top: 15px;text-align: center;line-height: 300px;"
         id="a4">
         暂无回答
     </div>
-    <div class="article_a col-md-10 col-xs-12 col-md-offset-1" style="margin-top: 15px;text-align: center;line-height: 300px;"
+    <div class="article_b col-md-10 col-xs-12 col-md-offset-1 hid" style="margin-top: 15px;text-align: center;line-height: 300px;"
         id="a5">
-        暂无提问
+        <div class="setting">
+            <ul class="setting__side">
+                <li :class="{active: showMain == 0}" @click="showMain = 0">账号与安全</li>
+                <li :class="{active: showMain == 1}" @click="showMain = 1">支付设置</li>
+                <li :class="{active: showMain == 2}" @click="showMain = 2">修改密码</li>
+                <li :class="{active: showMain == 3}" @click="showMain = 3">关于优便</li>
+                <li>退出登录</li>
+            </ul>
+            <div class="setting__main">
+                <transition name="fade"  mode="out-in">
+                    <div class="safety" v-if="showMain == 0">
+                        <h1>优便校园</h1>
+                        <p>优便校园，优便你我他</p>
+                        <div class="safety__content">
+                            <div>
+                                <span>优便号：</span><span>Wonder</span>
+                            </div>
+                            <div>
+                                <span>绑定邮箱：</span>
+                                <div>
+                                    <span>${safety.bindEmail}</span>
+                                    <el-button type="primary" size="small" @click="safety.modifyEmail = 1">修改</el-button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <el-dialog
+                            title = "修改绑定的邮箱"
+                            :visible.sync = "safety.modifyEmail"
+                            center
+                        ></el-dialog>
+                    </div>
+                    <div class="paySetting" v-if="showMain == 1">
+                        <h1>优便校园</h1>
+                        <p>优便校园，优便你我他</p>
+                        <el-button type="primary" >开通支付功能</el-button>
+                        <el-button type="primary" >修改支付密码</el-button>
+                    </div>
+                    <div class="modifyPassword" v-if="showMain == 2">
+                        <h1>优便校园</h1>
+                        <p>优便校园，优便你我他</p>
+                        <el-form :model="modifyPassword" :rules="rules" ref="form" label-width="100px">
+                            <el-form-item label="原密码" prop="originPassword">
+                                <el-input type="password" v-model="modifyPassword.originPassword" autocompolete/>
+                            </el-form-item>
+                            <el-form-item label="密码" prop="password">
+                                <el-input type="password" v-model="modifyPassword.password" autocompolete/>
+                            </el-form-item>
+                            <el-form-item label="确认密码" prop="confirmPassword">
+                                <el-input type="password" v-model="modifyPassword.confirmPassword" autocompolete/>
+                            </el-form-item>
+                            <el-form-item>
+                                <el-button type="primary" @click="handleSubmit('form')">提交</el-button>
+                                <el-button @click="handleReset('form')">重置</el-button>
+                            </el-form-item>
+                        </el-form>
+                    </div>
+                    <div class="about" v-if="showMain == 3">
+                        关于优便
+                    </div>
+                </transition>
+            </div>
+        </div>
     </div>
     <script type="text/javascript">
         function update(f) {

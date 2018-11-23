@@ -4,7 +4,6 @@
 * and open the template in the editor.
 */
 
-
 function center() {
   wid = document.body.clientWidth;
   obj = document.getElementByClassName("content");
@@ -271,4 +270,57 @@ $(function () {
 
   });
 
+  const setting = new Vue({
+    el: '.setting',
+    delimiters: ['${', '}'],
+    data: {
+      showMain: 0,   //默认第一个
+      //账号和安全信息
+      safety: {
+        'youbianNumber': 'Wonder',
+        'bindEmail': '1491733348@qq.com',
+        'modifyEmail': 0,
+      },
+      //密码修改信息
+      modifyPassword: {},
+      //修改密码验证规则
+      rules: {
+        originPassword: [
+          { required: true, message: "原密码不可以为空", trigger: 'blur' },
+          {min: 6, max: 16, message: "长度在 6 到 16 个字符", trigger: 'blur'},
+        ],
+        password: [
+          { required: true, message: "密码不可以为空", trigger: 'blur' },
+          {min: 6, max: 16, message: "长度在 6 到 16 个字符", trigger: 'blur'},
+        ],
+        confirmPassword: [
+          { required: true, message: "确认密码不可以为空", trigger: 'blur' },
+          {min: 6, max: 16, message: "长度在 6 到 16 个字符", trigger: 'blur'},
+          {validator: (rule, value, callback) => {
+            if(value !== setting.modifyPassword.password){
+              callback(new Error('两次密码输入不一致'));
+            }else {
+              callback();
+            }
+          }, trigger: 'blur'},
+        ],
+      }
+    },
+    methods: {
+      //修改密码提交
+      handleSubmit (formName) {
+        this.$refs[formName].validate((valid) => {
+          if(valid) {
+            alert('submit');
+          }else {
+            return false;
+          }
+        })
+      },
+      //修改密码重置
+      handleReset (formName) {
+        this.$refs[formName].resetFields();
+      }
+    },
+  });
 });

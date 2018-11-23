@@ -11,9 +11,9 @@
 .right3{border-top-left-radius: 45px;border-bottom-left-radius: 45px;border-bottom-right-radius: 45px;}
 .right4{border-bottom-left-radius: 45px;border-bottom-right-radius: 45px;border-top-right-radius: 45px;}
 .programa ul{text-align: center;margin-bottom: 0;background: rgba(0, 0, 32, 0.1);}
-.programa li{list-style: none;float: left;cursor: pointer;padding: 15px 0 15px 0 }
+.programa li{list-style: none;float: left;cursor: pointer;padding: 15px 0 15px 0; transition: all .2s linear; }
 .programa li:hover,#bg1{background: rgba(0, 0, 32, 0.2);color: #fff;}
-.article_a{padding-bottom: 30px;display: none;height: 500px;}
+.article_a{padding-bottom: 30px;display: none; min-height: 100px;}
 #a1{display: block;}
 .article_a button,.model_content button{float: right;}
 .mask{display: none;}
@@ -39,7 +39,6 @@
 .yue p.pay-detail:hover {
     text-decoration:underline;
 }
-
 /* 支付样式 */
 .pay {
   width: 320px !important;
@@ -131,6 +130,104 @@
 }
 .income{
     color: #67c23a;
+}
+
+.setting, #a5{
+    display: flex;
+    margin: 0 !important;
+    padding: 0;
+    width: 100%;
+    /* border: 1px solid; */
+}
+.setting .setting__side {
+    margin: 0;
+    width: 150px;
+    min-height: 500px;
+    box-shadow: 2px 0 8px rgba(0, 0, 0, .2);
+}
+.setting .setting__side li{
+    padding: 7px 0;
+    font-size: 14px;
+    color: #333;
+    line-height: 1.5;
+    cursor: pointer;
+    transition: all .2s linear;
+}
+.setting .setting__side li:hover,.setting .setting__side li.active{
+    color: #1890ff;
+    background:#e6f7ff;
+}
+.setting .setting__main {
+    flex: 1;
+    position: relative;
+}
+.setting .setting__main>div{
+    position: absolute;
+    display: flex;
+    top: 0; left: 0;
+    padding: 5px;
+    line-height: 1.5;
+}
+.setting .setting__main div.paySetting,.setting .setting__main div.modifyPassword, .setting .setting__main div.safety{
+    flex-flow: column;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+.setting .setting__main div.paySetting>h1,.setting .setting__main div.modifyPassword>h1, .setting .setting__main div.safety>h1{
+    margin:30px 0 10px 0;
+    font-size:4.5rem;
+    font-weight: 600;
+    letter-spacing: 4px;
+    color:#0084ff;
+    text-align: center;
+}
+.setting .setting__main div.paySetting>p, .setting .setting__main div.modifyPassword>p, .setting .setting__main div.safety>p{
+    margin-bottom: 50px;
+    font-size:2rem;
+    color:#0084ff;
+    letter-spacing:1px;
+    text-align: center;
+}
+/* 支付设置 */
+.setting .setting__main div.paySetting p, .setting .setting__main div.modifyPassword .el-form{
+    width: 400px;
+}
+.setting .setting__main div.paySetting button{
+    margin:5px 0;
+    width: 250px;
+}
+/* 账号与安全 */
+.setting .setting__main div.safety > div.safety__content {
+    width: 350px;
+}
+.setting .setting__main div.safety > div.safety__content > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 8px 0;
+}
+.setting .setting__main div.safety > div.safety__content > div span{
+    font-size: 1.4rem;    
+}
+.setting .setting__main div.safety > div.safety__content > div > div{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+.setting .setting__main div.safety > div.safety__content > div > div button{
+    margin-left: 10px;
+}
+
+/* 设置切换动画 */
+.fade-enter-active, .fade-leave-active {
+    transition: opacity .2s linear;
+}
+.fade-enter, .fade-leave-to {
+    opacity: 0;
+}
+.fade-leave, .fade-enter-to{
+    opacity: 1;
 }
 
 /* 响应式 */

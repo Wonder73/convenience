@@ -1,9 +1,16 @@
 .logo h1{
-  margin:30px 0 100px 0;
+  margin:30px 0 10px 0;
   font-size:4.5rem;
 	font-weight: 600;
 	letter-spacing: 4px;
   color:#0084ff;
+  text-align: center;
+}
+.logo p{
+  margin-bottom: 100px;
+  font-size:2rem;
+  color:#0084ff;
+  letter-spacing:1px;
   text-align: center;
 }
 .item{
@@ -268,7 +275,22 @@ div.app_shadow{
   height:120%;
   background:rgba(0,0,0,.4);
   z-index:998;
-  /* display:none; */
+}
+
+/* 用户登录按钮 */
+.userLogin {
+  text-align: center;
+}
+.userLogin button {
+  display: block;
+  margin: 0 auto;
+  width: 250px;
+  height: 40px;
+  font-size: 16px;
+  color: #fff;
+  background: #0084ff;
+  border: none;
+  border-radius: 8px;
 }
 
 /* 应用添加响应式 */
@@ -285,7 +307,8 @@ div.app_shadow{
 
 /* 轮播响应式 */
 @media only screen and (max-width: 720px){
-	.logo h1{margin-bottom: 50px; font-size: 3.5rem;}
+  .logo h1{font-size: 3.5rem;}
+  .logo p{margin-bottom: 50px; }
 	.item{ width: 96%; }
 }
 @media only screen and (max-width: 420px){
