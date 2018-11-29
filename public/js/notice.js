@@ -33,7 +33,7 @@ $(function (){
     
     $.ajax({
         type: "post",
-        url: common.rootURL + "home/getuserid",
+        url: common.rootURL + "/home/getuserid",
         dataType:"json",
         data: {
             'id': userInfo.id,

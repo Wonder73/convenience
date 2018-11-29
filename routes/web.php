@@ -63,6 +63,20 @@ Route::group(['prefix' => '', 'namespace' => 'Client'], function (){
         Route::post('handlePay', 'IndexController@handlePay');
         //获取零钱明细
         Route::post('getPayDetail', 'IndexController@getPayDetail');
+
+        //设置
+        Route::group(['prefix'=>'config'], function (){
+            //修改邮箱
+            Route::post('modifyEmail', 'IndexController@modifyEmail');
+            //判断是否开启支付
+            Route::post('checkOpenPay', 'IndexController@checkOpenPay');
+            //设置或者修改支付密码
+            Route::post('configPayPassword', 'IndexController@configPayPassword');
+            //检查密码是否正确
+            Route::post('checkPassword', 'IndexController@checkPassword');
+            //修改密码
+            Route::post('modifyPassword', 'IndexController@modifyPassword');
+        });
 		
 		
         //获取用户id
@@ -155,4 +169,47 @@ Route::group(['prefix' => 'yb-admin', 'namespace' => 'Admin'], function (){
         //删除
         Route::post('deleteData', 'AppController@deleteData');
     });
+
+     //管理员后台登陆
+     Route::get('login','admin\AdminController@login');
+     Route::post('loginok','admin\AdminController@loginok');
+     //管理员退出登陆
+     Route::get('loginout','admin\AdminController@loginout');
+     //管理员列表
+     Route::get('adminlist', 'admin\AdminController@adminlist');
+     //删除管理员
+     Route::post('admindel', 'admin\AdminController@admindel');
+     //添加管理员
+     Route::match(['get','post'],'adminadd', 'admin\AdminController@adminadd');
+     //书籍共享后台 
+     Route::get('booklist', 'admin\IndexController@booklist');
+     Route::post('bookdel', 'admin\IndexController@bookdel');
+
+     //启事首页
+    Route::get('noticeIndex', 'NoticeController@index');
+    //启事类型
+    Route::get('typeIndex/{type}', 'NoticeController@typeIndex');
+    //删除启事
+    Route::post('delete', 'NoticeController@delete');
+    //启事搜索
+    Route::post('search', 'NoticeController@search');
+    //角色管理首页
+    Route::get('roleIndex', 'RoleController@index');
+    //角色添加
+    Route::match(['get','post'],'addRole', 'RoleController@addRole');
+    //删除角色
+    Route::post('delRole','RoleController@delRole'); 
+    //修改角色
+    Route::match(['get','post'],'updateRole/{role}','RoleController@updateRole'); 
+});
+
+//功能 书籍共享
+Route::group(['prefix' => 'home', 'namespace' => 'Book'], function (){
+    Route::get('booklist', 'BookController@booklist'); 
+    Route::get('bookinfo', 'BookController@bookinfo');
+    Route::get('mybook', 'BookController@mybook');
+    Route::match(['get','post'],'bookshare', 'BookController@bookshare');
+    //上传图片
+    Route::post('upimage','BookController@upimage');
+    Route::post('lend', 'BookController@lend');
 });

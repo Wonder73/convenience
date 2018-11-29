@@ -19,4 +19,8 @@ class Item extends Model
     public function comment(){
         return $this->hasMany('App\Http\Models\Client\Home\Comment','item_id','id');
     }
+    
+    public function user(){
+        return $this->hasOne('App\Http\Models\Client\Home\User','id','user_id');
+    }
 }

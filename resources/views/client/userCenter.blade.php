@@ -62,9 +62,9 @@ and open the template in the editor.
         <div class="programa col-md-12 col-xs-12" style="padding: 0;">
             <ul class="programa col-md-12 col-xs-12 header-nav" style="padding: 0;">
                 <li class="col-md-4 col-xs-4 active" onclick="show(1)" id="bg1">个人信息</li>
-                <li class="col-md-2 col-xs-2" onclick="show(2)" id="bg2">用户身份</li>
+                <li class="col-md-4 col-xs-4" onclick="show(2)" id="bg2">用户身份</li>
                 <li class="col-md-2 col-xs-2" onclick="show(3)" id="bg3">余额</li>
-                <li class="col-md-2 col-xs-2" onclick="show(4)" id="bg4">文章</li>
+                <li onclick="show(4)" id="bg4"></li>
                 <li class="col-md-2 col-xs-2" onclick="show(5)" id="bg5">设置</li>
             </ul>
         </div>
@@ -335,56 +335,59 @@ and open the template in the editor.
     </div>
     <div class="col-md-10 col-xs-12 col-md-offset-1 hid" style="margin-top: 15px;" id="a3">
         <div class="yue">
-            <p>我的余额</p>
-            <h1>${money | moneyFormat}</h1>
-            <el-button type="primary" style="width: 100%;" @click="topUp = true">充值</el-button>
-            <el-button width="100%" style="width: 100%;">提现</el-button>
-            <p class="pay-detail" @click="showPayDetail">零钱明细</p>
-
-            <div class="pay">
-                <el-dialog custom-class="pay" title="输入金额" :visible.sync="topUp" center>
-                    <div class="pay--main">
-                        <span>${pay.type == 0? '充值': pay.type == 1? '提现': '充值'}</span>
-                        <div class="pay--main__money">
-                            <el-input type="number" autofocus="autofocus" v-model="pay.cost" @keyup.enter="showPay"></el-input>
-                            <el-button type="primary" @click="showPay">充值</el-button>
+            <div v-if="openPay">
+                <p>我的余额</p>
+                <h1>${money | moneyFormat}</h1>
+                <el-button type="primary" style="width: 100%;" @click="topUp = true">充值</el-button>
+                <el-button width="100%" style="width: 100%;">提现</el-button>
+                <p class="pay-detail" @click="showPayDetail">零钱明细</p>
+    
+                <div class="pay">
+                    <el-dialog custom-class="pay" title="输入金额" :visible.sync="topUp" center>
+                        <div class="pay--main">
+                            <span>${pay.type == 0? '充值': pay.type == 1? '提现': '充值'}</span>
+                            <div class="pay--main__money">
+                                <el-input type="number" autofocus="autofocus" v-model="pay.cost" @keyup.enter="showPay"></el-input>
+                                <el-button type="primary" @click="showPay">充值</el-button>
+                            </div>
                         </div>
-                    </div>
+                    </el-dialog>
+                </div>
+    
+                <div class="pay">
+                    <el-dialog custom-class="pay" title="请输入支付密码" :visible.sync="pay.visible" center>
+                        <div class="pay--main">
+                            <span>${pay.type == 0? '充值': pay.type == 1? '提现': '充值'}</span>
+                            <span>${pay.cost | moneyFormat}</span>
+                            <div class="pay--main__password" @click="handleClick">
+                                <span>${(payPassword.length > 0? '●': null)}</span>
+                                <span>${(payPassword.length > 1? '●': null)}</span>
+                                <span>${(payPassword.length > 2? '●': null)}</span>
+                                <span>${(payPassword.length > 3? '●': null)}</span>
+                                <span>${(payPassword.length > 4? '●': null)}</span>
+                                <span>${(payPassword.length > 5? '●': null)}</span>
+                            </div>
+                            <input type="number" style="opacity:0" v-model="payPassword" maxlength="6" :disabled="disabledInput"
+                                autofocus="autofocus" ref="input" />
+                        </div>
+                    </el-dialog>
+                </div>
+    
+                <!-- 零钱明细 -->
+                <el-dialog custom-class="pay-detail__dialog" title="零钱明细" :visible.sync="payDetail.visiable" center>
+                    <ul class="pay-detail__dialog--list" @scroll="handleScroll($event)">
+                        <li v-for="(value, index) of payDetail.dataSource" :key="index">
+                            <div class="pay-detail__dialog--list-left">
+                                <p>${value.organization}</p>
+                                <p>${value.date}</p>
+                            </div>
+                            <div :class="{'pay-detail__dialog--list-right':true, 'income': !!value.consume_type}">${value.consume_type?
+                                '+': '-'} ${value.consume_cost}</div>
+                        </li>
+                    </ul>
                 </el-dialog>
             </div>
-
-            <div class="pay">
-                <el-dialog custom-class="pay" title="请输入支付密码" :visible.sync="pay.visible" center>
-                    <div class="pay--main">
-                        <span>${pay.type == 0? '充值': pay.type == 1? '提现': '充值'}</span>
-                        <span>${pay.cost | moneyFormat}</span>
-                        <div class="pay--main__password" @click="handleClick">
-                            <span>${(payPassword.length > 0? '●': null)}</span>
-                            <span>${(payPassword.length > 1? '●': null)}</span>
-                            <span>${(payPassword.length > 2? '●': null)}</span>
-                            <span>${(payPassword.length > 3? '●': null)}</span>
-                            <span>${(payPassword.length > 4? '●': null)}</span>
-                            <span>${(payPassword.length > 5? '●': null)}</span>
-                        </div>
-                        <input type="number" style="opacity:0" v-model="payPassword" maxlength="6" :disabled="disabledInput"
-                            autofocus="autofocus" ref="input" />
-                    </div>
-                </el-dialog>
-            </div>
-
-            <!-- 零钱明细 -->
-            <el-dialog custom-class="pay-detail__dialog" title="零钱明细" :visible.sync="payDetail.visiable" center>
-                <ul class="pay-detail__dialog--list" @scroll="handleScroll($event)">
-                    <li v-for="(value, index) of payDetail.dataSource" :key="index">
-                        <div class="pay-detail__dialog--list-left">
-                            <p>${value.organization}</p>
-                            <p>${value.date}</p>
-                        </div>
-                        <div :class="{'pay-detail__dialog--list-right':true, 'income': !!value.consume_type}">${value.consume_type?
-                            '+': '-'} ${value.consume_cost}</div>
-                    </li>
-                </ul>
-            </el-dialog>
+            <p v-else style="text-align: center;">未开通支付功能，请前往设置中设置</p>
         </div>
     </div>
     <div class="article_a col-md-10 col-xs-12 col-md-offset-1 hid" style="margin-top: 15px;text-align: center;line-height: 300px;"
@@ -394,13 +397,14 @@ and open the template in the editor.
     <div class="article_b col-md-10 col-xs-12 col-md-offset-1 hid" style="margin-top: 15px;text-align: center;line-height: 300px;"
         id="a5">
         <div class="setting">
-            <ul class="setting__side">
+            <ul :class="{'setting__side':true, 'active': slideSide}">
                 <li :class="{active: showMain == 0}" @click="showMain = 0">账号与安全</li>
-                <li :class="{active: showMain == 1}" @click="showMain = 1">支付设置</li>
+                <li :class="{active: showMain == 1}" @click="showPayConfig">支付设置</li>
                 <li :class="{active: showMain == 2}" @click="showMain = 2">修改密码</li>
                 <li :class="{active: showMain == 3}" @click="showMain = 3">关于优便</li>
-                <li>退出登录</li>
+                <li @click="logout">退出登录</li>
             </ul>
+            <i :class="{'el-icon-d-arrow':true, 'el-icon-d-arrow-right': true, 'active': slideSide}" @click="slideSide = !slideSide"></i>
             <div class="setting__main">
                 <transition name="fade"  mode="out-in">
                     <div class="safety" v-if="showMain == 0">
@@ -414,27 +418,102 @@ and open the template in the editor.
                                 <span>绑定邮箱：</span>
                                 <div>
                                     <span>${safety.bindEmail}</span>
-                                    <el-button type="primary" size="small" @click="safety.modifyEmail = 1">修改</el-button>
+                                    <el-button type="primary" size="small" @click="handleModifyButton">修改</el-button>
                                 </div>
                             </div>
                         </div>
 
                         <el-dialog
+                            custom-class="modifyEmail-dialog"
                             title = "修改绑定的邮箱"
                             :visible.sync = "safety.modifyEmail"
+                            @close = "resetData"
                             center
-                        ></el-dialog>
+                        >
+                            <el-form :model="safety.modifyEmailInfo" :rules="modifyEmailRules" ref="modifyEmailForm" label-width="70px" @submit.native.prevent>
+                                <div v-if="!safety.modifyEmailInfo.next" :key="1">
+                                    <el-form-item label="原邮箱">
+                                        <span>${safety.bindEmail}</span>
+                                    </el-form-item>
+                                    <el-form-item prop="originValidate" label="验证码">
+                                        <div class="modifyEmail-dialog__originValidate">
+                                            <el-input type="text" placeholder="输入验证码" v-model="safety.modifyEmailInfo.originValidate" @keyup.enter.native="handleModifyEmail('modifyEmailForm')"></el-input>
+                                            <el-button @click="getCode(safety.bindEmail)" :disabled="safety.buttonStatus.disabled">${safety.buttonStatus.content}</el-button>
+                                        </div>
+                                    </el-form-item>
+                                    <el-form-item>
+                                        <el-button type="primary" @click="handleModifyEmail('modifyEmailForm')">下一步</el-button>
+                                        <el-button @click="handleReset('modifyEmailForm')">重置</el-button>
+                                    </el-form-item>
+                                </div>
+                                <div v-else :key="2">
+                                    <el-form-item prop="newEmail" label="新邮箱">
+                                        <el-input type="text" placeholder="输入要绑定的邮箱" v-model="safety.modifyEmailInfo.newEmail" autofocus></el-input>
+                                    </el-form-item>
+                                    <el-form-item prop="newValidate" label="验证码">
+                                        <div class="modifyEmail-dialog__originValidate">
+                                            <el-input type="text" placeholder="输入验证码" v-model="safety.modifyEmailInfo.newValidate" @keyup.enter.native="handleSaveEmail('modifyEmailForm')"></el-input>
+                                            <el-button @click="getNewCode" :disabled="safety.buttonStatus.disabled">${safety.buttonStatus.content}</el-button>
+                                        </div>
+                                    </el-form-item>
+                                    <el-form-item>
+                                        <el-button type="primary" @click="handleSaveEmail('modifyEmailForm')">保存</el-button>
+                                        <el-button @click="handleReset('modifyEmailForm')">重置</el-button>
+                                    </el-form-item>
+                                </div>
+                            </el-form>
+                        </el-dialog>
                     </div>
                     <div class="paySetting" v-if="showMain == 1">
                         <h1>优便校园</h1>
                         <p>优便校园，优便你我他</p>
-                        <el-button type="primary" >开通支付功能</el-button>
-                        <el-button type="primary" >修改支付密码</el-button>
+                        <el-button type="primary" v-if="!payConfig.type" @click="openPay">开通支付功能</el-button>
+                        <el-button type="primary" v-else @click="openPay">修改支付密码</el-button>
+
+                        <el-dialog
+                            custom-class="modifyEmail-dialog"
+                            title = "验证邮箱"
+                            :visible.sync = "payConfig.showValidateEmail"
+                            @close = "resetData"
+                            center
+                        >
+                            <el-form :model="safety.modifyEmailInfo" :rules="modifyEmailRules" ref="confirmEmailForm" label-width="70px" @submit.native.prevent>
+                                <el-form-item label="邮箱">
+                                    <span>${safety.bindEmail}</span>
+                                </el-form-item>
+                                <el-form-item prop="originValidate" label="验证码">
+                                    <div class="modifyEmail-dialog__originValidate">
+                                        <el-input type="text" placeholder="输入验证码" v-model="safety.modifyEmailInfo.originValidate" @keyup.enter.native="handleModifyEmail('confirmEmailForm')"></el-input>
+                                        <el-button @click="getCode(safety.bindEmail)" :disabled="safety.buttonStatus.disabled">${safety.buttonStatus.content}</el-button>
+                                    </div>
+                                </el-form-item>
+                                <el-form-item>
+                                    <el-button type="primary" @click="handlePaySubmit('confirmEmailForm')">提交</el-button>
+                                    <el-button @click="handleReset('confirmEmailForm')">重置</el-button>
+                                </el-form-item>
+                            </el-form>
+                        </el-dialog>
+
+                        <el-dialog custom-class="pay" :title="payConfig.confirm? '确认密码': '请输入支付密码'" :visible.sync="payConfig.ShowPayPassword" center>
+                            <div class="pay--main">
+                                <div class="pay--main__password" @click="handleClick">
+                                    <span>${(payPassword.length > 0? '●': null)}</span>
+                                    <span>${(payPassword.length > 1? '●': null)}</span>
+                                    <span>${(payPassword.length > 2? '●': null)}</span>
+                                    <span>${(payPassword.length > 3? '●': null)}</span>
+                                    <span>${(payPassword.length > 4? '●': null)}</span>
+                                    <span>${(payPassword.length > 5? '●': null)}</span>
+                                </div>
+                                <input type="number" style="opacity:0" v-model="payPassword" maxlength="6" :disabled="payConfig.disabledInput"
+                                    autofocus="autofocus" ref="input" />
+                            </div>
+                        </el-dialog>
+                        
                     </div>
                     <div class="modifyPassword" v-if="showMain == 2">
                         <h1>优便校园</h1>
                         <p>优便校园，优便你我他</p>
-                        <el-form :model="modifyPassword" :rules="rules" ref="form" label-width="100px">
+                        <el-form :model="modifyPassword" :rules="rules" ref="modifyPassword" label-width="100px">
                             <el-form-item label="原密码" prop="originPassword">
                                 <el-input type="password" v-model="modifyPassword.originPassword" autocompolete/>
                             </el-form-item>
@@ -445,8 +524,8 @@ and open the template in the editor.
                                 <el-input type="password" v-model="modifyPassword.confirmPassword" autocompolete/>
                             </el-form-item>
                             <el-form-item>
-                                <el-button type="primary" @click="handleSubmit('form')">提交</el-button>
-                                <el-button @click="handleReset('form')">重置</el-button>
+                                <el-button type="primary" @click="handleSubmit('modifyPassword')">提交</el-button>
+                                <el-button @click="handleReset('modifyPassword')">重置</el-button>
                             </el-form-item>
                         </el-form>
                     </div>

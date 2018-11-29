@@ -58,30 +58,31 @@ Common.prototype._randomColor = function (min, max){
 
 /* 加密算法 */
 Common.prototype.encryption = function (value){
-  var encreyption = value.split('').reverse().join('');
-      var encreyption2 = '';
-      var encreyption3 = '';
-      var encreyption4 = '';
-      var encreyption5 = '';
-      var encreyption6 = '';
-      for(let i = 0;i<encreyption.length;i++){
-        encreyption2 += encreyption[i].charCodeAt().toString(16);
-      }
-      for(let i = 0;i<encreyption2.length;i++){
-        encreyption3 += parseInt(encreyption2[i],16);
-      }
-      for(let i = 0;i<encreyption3.length;i++){
-        encreyption4 += (+encreyption3[i]).toString(8);
-      }
-      for(let i = 0;i<encreyption4.length;i++){
-        encreyption5 += (+encreyption4[i]).toString(2);
-      }
-      for(let i = 0;i<encreyption5.length;i++){
-        encreyption6 += (encreyption5[i] == '0'?'1':0);
-      }
-      var encreyption7 = parseInt(encreyption6,2).toString().split('').reverse().join('');
+  var encreyption = value.toLowerCase().split('').reverse().join('');
+  
+  var encreyption2 = '';
+  var encreyption3 = '';
+  var encreyption4 = '';
+  var encreyption5 = '';
+  var encreyption6 = '';
+  for(let i = 0;i<encreyption.length;i++){
+    encreyption2 += encreyption[i].charCodeAt().toString(16);
+  }
+  for(let i = 0;i<encreyption2.length;i++){
+    encreyption3 += parseInt(encreyption2[i],16);
+  }
+  for(let i = 0;i<encreyption3.length;i++){
+    encreyption4 += (+encreyption3[i]).toString(8);
+  }
+  for(let i = 0;i<encreyption4.length;i++){
+    encreyption5 += (+encreyption4[i]).toString(2);
+  }
+  for(let i = 0;i<encreyption5.length;i++){
+    encreyption6 += (encreyption5[i] == '0'?'1':0);
+  }
+  var encreyption7 = parseInt(encreyption6,2).toString().split('').reverse().join('');
 
-      return encreyption7;
+  return encreyption7;
 }
 
 /* 修改jq的ajax */

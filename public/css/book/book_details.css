@@ -1,0 +1,93 @@
+/*
+重置样式表
+*/
+*{padding:0;margin: 0;font-family: 微软雅黑;}
+a,s,del{text-decoration: none;color:#333;font-size: 16px;}
+ul{list-style-type: none;}
+img{display: block;border:none;}
+h1,h2,h3,h4,h5,h6,i,em,b,strong{font: 12px normal;font-family: 微软雅黑;}
+a,input,textarea,select,button{outline: none;}
+.clear{clear: both;}
+.clearfix:after{width: 0;height: 0;display: block;content:"";visibility: hidden;clear: both;}
+
+/*
+middle
+*/
+.middle{
+    width: 100%;
+    margin: 0 auto;
+    padding-top: 10px;
+    margin-bottom: 100px;
+}
+.middle-left{
+	width: 100%;
+	float: left;
+	box-shadow:5px 2px 6px #ccc;
+}
+.middle-right{
+	width: 100%;
+	float: right;
+	background-color:#ACDAEB;
+}
+.details p{
+	font-family: "微软雅黑";
+	font-size: 110%;
+}
+.details p b{
+	font-family: "微软雅黑";
+    margin-left: 5%;
+	font-size: 100%;
+	color:#FFFFFF;
+}
+.middle_btn{
+	width: 100%;
+}
+.middle_btn button{
+	width: 100px;
+	height: 50px;
+	margin: 3% auto;
+	background-color: antiquewhite;
+}
+/*
+footer
+*/
+.footer{
+    width: 100%;
+    margin-top: 34px;
+    background: #eee;
+}
+.footer .top-box{
+    width: 100%;
+    border-bottom: 1px solid #999;
+}
+.footer .top-box .top{
+    margin: 0 auto;
+    padding: 16px 0;
+}
+.footer .top-box .top ul{
+    text-align: center;
+}
+.footer .top-box .top ul li{
+    display: inline-block;
+    margin: 0 10%;
+    text-align: center;
+}
+.footer .top-box .top ul li>div{
+    margin: 0 auto;
+    text-align: center;
+}
+.footer .top-box .top ul li>div h5{
+    display: block;
+    width: 37px;
+    height: 43px;
+    margin-right: 18px;
+    float: left;
+}
+.footer .top-box .top ul li>div p{
+    display: block;
+    height: 43px;
+    line-height: 43px;
+    float: left;
+    font-size: 100%;
+    color: #333;
+}

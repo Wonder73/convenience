@@ -86,7 +86,7 @@ class LoginRegController extends Controller
         }])->where('email', $info['email']) -> get() -> toArray();
 
         if($res) {
-            return '{"id": "'. $res[0]['id'] .'", "username": "'. $res[0]['username'] .'", "password": "'. $res[0]['password'] .'", "user_identity": '. json_encode($res[0]['user_identity']) .', "user_app": '. json_encode($res[0]['user_info']['app']) .'}';
+            return '{"id": "'. $res[0]['id'] .'", "username": "'. $res[0]['username'] .'", "password": "'. $res[0]['password'] .'", "email": "'. $res[0]['email'] .'", "user_identity": '. json_encode($res[0]['user_identity']) .', "user_app": '. json_encode($res[0]['user_info']['app']) .'}';
         }else{
             return 1;
         }
@@ -113,7 +113,7 @@ class LoginRegController extends Controller
         
         if($res) {
             if($res[0]['username'] == $info['username'] && ($res[0]['password'] == md5($info['password'] . $res[0]['salt']) || $res[0]['password'] == $info['password'])){
-                return '{"id": "'. $res[0]['id'] .'", "username": "'. $info['username'] .'", "password": "'. $info['password'] .'", "user_identity": '. json_encode($res[0]['user_identity']) .', "user_app": '. json_encode($res[0]['user_info']['app']) .'}';
+                return '{"id": "'. $res[0]['id'] .'", "username": "'. $info['username'] .'", "password": "'. $info['password'] .'", "email": "'. $res[0]['email'] .'", "user_identity": '. json_encode($res[0]['user_identity']) .', "user_app": '. json_encode($res[0]['user_info']['app']) .'}';
             }else{
                 return 2;
             }

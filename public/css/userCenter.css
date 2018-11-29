@@ -16,6 +16,7 @@
 .article_a{padding-bottom: 30px;display: none; min-height: 100px;}
 #a1{display: block;}
 .article_a button,.model_content button{float: right;}
+.img_content>img {width: 150px!important;height:150px;}
 .mask{display: none;}
 .back{text-align: right;color: #fff;width: 100%;margin-top: 15px;}
 .yue {
@@ -131,19 +132,23 @@
 .income{
     color: #67c23a;
 }
-
 .setting, #a5{
     display: flex;
     margin: 0 !important;
     padding: 0;
     width: 100%;
-    /* border: 1px solid; */
+}
+#a5 {
+    display: none;
 }
 .setting .setting__side {
+    position: relative;
     margin: 0;
     width: 150px;
     min-height: 500px;
+    background: #fff;
     box-shadow: 2px 0 8px rgba(0, 0, 0, .2);
+    z-index: 998;
 }
 .setting .setting__side li{
     padding: 7px 0;
@@ -156,6 +161,15 @@
 .setting .setting__side li:hover,.setting .setting__side li.active{
     color: #1890ff;
     background:#e6f7ff;
+}
+.setting .el-icon-d-arrow {
+    position: absolute;
+    display: none;
+    font-size: 20px;
+    margin: 10px;
+    color: #999;
+    cursor: pointer;
+    z-index: 998;
 }
 .setting .setting__main {
     flex: 1;
@@ -172,7 +186,6 @@
     flex-flow: column;
     align-items: center;
     width: 100%;
-    height: 100%;
 }
 .setting .setting__main div.paySetting>h1,.setting .setting__main div.modifyPassword>h1, .setting .setting__main div.safety>h1{
     margin:30px 0 10px 0;
@@ -190,10 +203,10 @@
     text-align: center;
 }
 /* 支付设置 */
-.setting .setting__main div.paySetting p, .setting .setting__main div.modifyPassword .el-form{
+.setting .setting__main div.modifyPassword .el-form{
     width: 400px;
 }
-.setting .setting__main div.paySetting button{
+.setting .setting__main div.paySetting>button{
     margin:5px 0;
     width: 250px;
 }
@@ -218,6 +231,21 @@
 .setting .setting__main div.safety > div.safety__content > div > div button{
     margin-left: 10px;
 }
+/* 修改绑定邮箱弹框样式 */
+.modifyEmail-dialog {
+    width: 450px;
+}
+.modifyEmail-dialog form .modifyEmail-dialog__originValidate{
+    display: flex;    
+}
+.modifyEmail-dialog form .modifyEmail-dialog__originValidate .el-input{
+    padding-right: 5px;
+    flex: 1;
+}
+.modifyEmail-dialog form .modifyEmail-dialog__originValidate .el-input input{
+    width: 100%;
+}
+
 
 /* 设置切换动画 */
 .fade-enter-active, .fade-leave-active {
@@ -231,29 +259,7 @@
 }
 
 /* 响应式 */
-@media only screen and (max-width: 320px) {
-  .pay { width: 98% !important; }
-}
-@media (max-width: 768px){
-    .head img{width: 100px;height: 100px;}
-    .userName,.right p,.programa{font-size: 12px;}
-    .right{width: 100px;}
-    .content{height: 224px;}
-    .right1,.right2,.right3,.right4{width: 50px;height: 50px;}
-    .right1 p,.right2 p,.right3 p,.right4 p{margin: 8px 0 0 15px;}
-    .programa ul{margin-top: 10px;}
-    .back{font-size: 18px;padding-right: 56px;}
-}
-@media (mix-width: 768px){
-    .head img{width: 150px;height: 150px;}
-    .userName,.right p,.programa{font-size: 16px;}
-    .right{width: 150px;}
-    .content{height: 306px;}
-    .right1,.right2,.right3,.right4{width: 75px;height: 75px;}
-    .right1 p,.right2 p,.right3 p,.right4 p{margin: 12px 0 0 20px;}
-    .programa ul{margin-top: 30px;}
-    .back{font-size: 24px;padding-right: 80px;}
-}
+
 @media (mix-width: 992px) {
     .head img{width: 222px;height: 222px;}
     .userName,.right p,.programa{font-size: 24px;}
@@ -265,6 +271,47 @@
     .img_content{position: relative;padding: 0;width: 222px;height: 222px;border-radius: 100%;}
     .img_content:hover .mask{position: absolute;top:-102px;left: 0;width: 222px;height: 222px;line-height: 222px;border-radius: 100%;background: rgba(0, 0, 32, 0.6);color:#fff;text-align: center;display: block;}
     .back{font-size: 36px;padding-right: 110px;}
+}
+@media (max-width: 768px){
+    .head img{width: 100px;height: 100px;}
+    .userName,.right p,.programa{font-size: 12px;}
+    .right{width: 100px;}
+    .content{height: 224px;}
+    .right1,.right2,.right3,.right4{width: 50px;height: 50px;}
+    .right1 p,.right2 p,.right3 p,.right4 p{margin: 8px 0 0 15px;}
+    .programa ul{margin-top: 10px;}
+    .back{font-size: 18px;padding-right: 56px;}
+}
+@media (max-width: 768px){
+    .head img{width: 150px;height: 150px;}
+    .userName,.right p,.programa{font-size: 16px;}
+    .right{width: 150px;}
+    .content{height: 306px;}
+    .right1,.right2,.right3,.right4{width: 75px;height: 75px;}
+    .right1 p,.right2 p,.right3 p,.right4 p{margin: 12px 0 0 20px;}
+    .programa ul{margin-top: 30px;}
+    .back{font-size: 24px;padding-right: 80px;}
+}
+@media only screen and (max-width: 720px){
+    .setting .setting__main div.paySetting>h1, .setting .setting__main div.modifyPassword>h1, .setting .setting__main div.safety>h1{font-size: 3.5rem;}
+    .setting .setting__main div.paySetting>p, .setting .setting__main div.modifyPassword>p, .setting .setting__main div.safety>p{margin-bottom: 20px; }
+}
+@media only screen and (max-width: 600px) {
+    /* 侧导航 */
+    .setting .el-icon-d-arrow{display: block;transition:transform .3s linear;}
+    .setting .el-icon-d-arrow.active{transform: translateX(150px) rotate(180deg);}
+    .setting .setting__side {position: absolute; transform: translateX(-105%);transition:transform .3s linear;}
+    .setting .setting__side.active {transform: translateX(0);}
+}
+@media only screen and (max-width: 500px) {
+    .modifyEmail-dialog {width: 96%;}
+}
+@media only screen and (max-width: 450px) {
+    /* 侧导航 */
+    .setting .setting__main div.safety > div.safety__content,.setting .setting__main div.paySetting p, .setting .setting__main div.modifyPassword .el-form, .setting .setting__main div.paySetting>button {width: 98%;}
+}
+@media only screen and (max-width: 320px) {
+    .pay { width: 98% !important; }
 }
 @media (max-width: 520px) {
     .yue { width: 96%; }

@@ -12,7 +12,7 @@ class Pay extends Model
 {
     protected $table = 'pay';
     protected $primarykey = 'id';
-    protected $fillable = ['money', 'error_count', 'cooling_date'];
+    protected $fillable = ['user_id', 'pay_password', 'salt', 'money', 'error_count', 'cooling_date'];
 
     public $timestamps = false;
 

@@ -1,0 +1,215 @@
+/*
+middle
+*/
+*{padding:0;margin: 0;font-family: 微软雅黑;}
+a,s,del{text-decoration: none;color:#333;font-size: 16px;}
+ul{list-style-type: none;}
+img{display: block;border:none;}
+h1,h2,h3,h4,h5,h6,i,em,b,strong{font: 12px normal;font-family: 微软雅黑;}
+a,input,textarea,select,button{outline: none;}
+.clear{clear: both;}
+.clearfix:after{width: 0;height: 0;display: block;content:"";visibility: hidden;clear: both;}
+/*
+logo
+*/
+
+.logo{
+    width: 100%;
+    margin: 0 auto;
+}
+.logo img{
+    float: left;
+    padding: 10% 15%;
+    text-transform: uppercase;
+}
+.search-box{
+	width: 100%;
+    margin-left: 5%;
+    padding: 2% 0;
+}
+.search{
+	width: 70%;
+    display: inline-block;
+    padding: 1%;
+    background: #eee;
+}
+
+.search input{
+    width: 78%;
+    height: 32px;
+	margin: 0 auto;
+	line-height: 32px;
+    border: transparent;
+}
+.search button{
+    float: right;
+    padding: 1% 1%;
+    font-size: 120%;
+    background: transparent;
+    border: transparent;
+    color: #91C0F1;
+    cursor:pointer;
+}
+.search-box .search-key{
+    margin-top: 6px;
+}
+.search-box .search-key ul li{
+    float: left;
+}
+.search-box .search-key ul li a{
+    padding-left: 16px;
+    padding-right:16px;
+    border-left: 1px solid #333;
+    font-size: 14px;
+    color: #323333;
+}
+.search-box .search-key ul li a.on,.search-box .search-key ul li a:hover{
+    color: #458aca;
+}
+.search-box .search-key ul li:first-child a{
+    padding-left: 0;
+    border-left: 1px solid transparent;
+}
+
+.middle{
+    width: 100%;
+    margin: 0 auto;
+    padding-top: 10px;
+    margin-bottom: 40px;
+}
+.book_list{
+	width: 100%;
+	margin: 0 auto;
+	
+}
+.book{
+	width: 100%;
+	height: 300px;
+	margin-right: 3%;
+	margin-top: 10%;
+	float: right;
+	box-shadow:5px 2px 6px #ccc;
+}
+.book_img{
+	width: 100%;
+	height: 82%;
+	float: left;
+}
+.book_img img{
+	width: 100%;
+	height: 100%;
+}
+
+
+.middle .filter-type-box{
+    margin-top: 14px;
+    padding: 6px 12px;
+    background: #eee;
+}
+.middle .filter-type-box .filter-type{
+    float: left;
+}
+.middle .filter-type-box .filter-type b{
+    position: relative;
+    display: inline-block;
+    padding: 4px 12px;
+    border: 1px solid #666;
+    margin-right: -1px;
+    /*border-left: 1px solid transparent;*/
+    font-size: 12px;
+    color: #333;
+    cursor:pointer;
+}
+.middle .filter-type-box .filter-type b.on{
+    background: #458aca;
+    border: 1px solid #458aca;
+    color: #fff;
+}
+.middle .filter-type-box .filter-type b:hover{
+    border: 1px solid #458aca;
+    color: #458aca;
+    z-index: 9999;
+}
+.middle .filter-type-box .filter-type b.on:hover{
+    color: #fff;
+}
+.middle .next-page-bottom{
+    margin-top: 10%;
+    text-align: center;
+}
+.middle .next-page-bottom a{
+    display: inline-block;
+    padding: 10px 18px;
+    border: 1px solid #999;
+    color: #458aca;
+}
+.middle .next-page-bottom a.on,.middle .next-page-bottom a:hover{
+    background: #f0f6fb;
+    color: #458aca;
+}
+.middle .next-page-bottom span{
+    display: inline-block;
+    padding: 10px 6px;
+    color: #333230;
+}
+.middle .next-page-bottom input{
+    display: inline-block;
+    width: 30px;
+    height: 16px;
+    padding: 6px;
+    text-align: center;
+}
+.middle .next-page-bottom button{
+    padding: 6px 8px;
+    background: #eee;
+    border: transparent;
+    cursor:pointer;
+    color:#000000;
+}
+
+/*
+footer
+*/
+/*
+footer
+*/
+.footer{
+    width: 100%;
+    margin-top: 34px;
+    background: #eee;
+}
+.footer .top-box{
+    width: 100%;
+    border-bottom: 1px solid #999;
+}
+.footer .top-box .top{
+    margin: 0 auto;
+    padding: 16px 0;
+}
+.footer .top-box .top ul{
+    text-align: center;
+}
+.footer .top-box .top ul li{
+    display: inline-block;
+    margin: 0 10%;
+    text-align: center;
+}
+.footer .top-box .top ul li>div{
+    margin: 0 auto;
+    text-align: center;
+}
+.footer .top-box .top ul li>div h5{
+    display: block;
+    width: 37px;
+    height: 43px;
+    margin-right: 18px;
+    float: left;
+}
+.footer .top-box .top ul li>div p{
+    display: block;
+    height: 43px;
+    line-height: 43px;
+    float: left;
+    font-size: 100%;
+    color: #333;
+}

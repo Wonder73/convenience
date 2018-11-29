@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Http\Models\Client\Index\Role;
+use App\Http\Models\Client\Index\User;
 use App\Http\Models\Client\Index\UserIdentity;
 use App\Http\Models\Client\Utilities\Pay;
 use App\Http\Models\Client\Utilities\Consume;
@@ -36,9 +37,9 @@ class IndexController extends Controller
     }
 
     public function get(Request $request){
-        $id = $request->input('id');        
+        $id = $request->input('id');  
         $data = DB::table('user_info')->where('user_id',$id)->get();
-        $identity = UserIdentity::where('user_id',$id)->get();
+        $identity = UserIdentity::where('user_id',$id)->get();     
         $roleid = $identity[0]['role_id'];
 
         $rolename = Role::where('id',$roleid)->pluck('role_name');
@@ -138,4 +139,103 @@ class IndexController extends Controller
             return ['type' => false, 'dataSource' => ''];
         }
     }
+
+
+    //修改用户邮箱
+    public function modifyEmail(Request $request) {
+        $data = $request -> all();
+
+        $info = User::find($data['userId']);  
+        $info -> email = $data['newEmail'];
+        $res = $info -> save();
+
+        if($res) {
+            return ['type' => true, 'message' => '修改成功！！！'];
+        }else{
+            return ['type' => false, 'message' => '修改失败，请重新修改！！！'];
+        }
+    }
+
+    //判断是否开启
+    public function checkOpenPay(Request $request) {
+        $data = $request -> all();
+
+        $count = Pay::where('user_id', $data['userId']) -> count();
+
+        if($count <= 0){
+            return ['type' => false, 'message' => '未开通了支付'];
+        }else {
+            return ['type' => true, 'message' => '开通了支付'];
+        }
+    }
+
+    //设置或者修改密码
+    public function configPayPassword(Request $request) {
+        $data = $request -> all();
+        $response = ['type' => false, 'message' => '设置失败！！！'];
+
+        $salt = $this -> randomStr(6);
+
+        if(!$data['type']){
+            $info = ['user_id' => $data['userId'], 'money' => 0, 'pay_password' => md5($data['payPassword'].$salt), 'salt' => $salt];
+            $res = Pay::create($info);
+            if($res) {
+                $response['type'] = true;
+                $response['message'] = '开通成功！！！';
+            }
+        }else {
+            $info = Pay::where('user_id', $data['userId']) -> first();
+
+            $info -> pay_password = md5($data['payPassword'].$salt);
+            $info -> salt = $salt;
+            $res = $info -> save();
+            if($res) {
+                $response['type'] = true;
+                $response['message'] = '修改成功！！！';
+            }
+        }
+
+        return $response;
+    }
+
+    //检查密码是否正确
+    public function checkPassword(Request $request) {
+        $data = $request -> all();
+
+        $info = User::find($data['userId']);
+        if(md5($data['originPassword'].$info['salt']) != $info['password']){
+            return ['type' => false, 'message' => '原密码不正确'];
+        }else {
+            return ['type' => true, 'message' => '修改成功'];
+        }
+    }
+
+    //修改密码
+    public function modifyPassword(Request $request){
+        $data = $request -> all();
+
+        $info = User::find($data['userId']);
+        $info -> password = md5($data['password'].$info->salt);
+        $res = $info -> save();
+
+        if($res) {
+            return ['type' => true, 'message' => '修改成功！！！'];
+        }else{
+            return ['type' => false, 'message' => '修改失败，请重新修改！！！'];
+        }
+    }
+
+
+    //获取随机字符串
+    private function randomStr($length){
+        $str = '1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnpqrstuvwxyz';
+        $validate = '';   //保存验证码
+
+        for($i = 0; $i < $length; $i++){
+            $validate .= $str[rand(0, strlen($str)-1)];
+        }
+
+        return $validate;
+    }
+
 }

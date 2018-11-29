@@ -27,7 +27,7 @@ and open the template in the editor.
 <body>
 <div class="top col-md-12 col-sm-12 col-xs-12">
 	<a href="#" style="float: left;">有一种难过，叫做丢了东西。有一种喜悦，叫做失而复得。</a>
-	<a href="#" style="float: right">前往首页</a>
+	<a href="{{url('/')}}" style="float: right">前往首页</a>
 </div>
 	
 <div class="nav col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
