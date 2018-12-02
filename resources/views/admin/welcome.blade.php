@@ -23,7 +23,7 @@
 </head>
 <body>
 <div class="page-container">
-	<p class="f-20 text-success">欢迎使用优便校园后台管理系统<span class="f-14">v3.1</span></p>
+	<p class="f-20 text-success">欢迎使用优便校园后台管理系统<span class="f-14">v1.0</span></p>
 	<table class="table table-border table-bordered table-bg">
 		<thead>
 			<tr>
@@ -81,7 +81,7 @@
 			</tr>
 		</tbody>
 	</table>
-	<table class="table table-border table-bordered table-bg mt-20">
+	<!-- <table class="table table-border table-bordered table-bg mt-20">
 		<thead>
 			<tr>
 				<th colspan="2" scope="col">服务器信息</th>
@@ -181,27 +181,9 @@
 				<td>NETWORK SERVICE</td>
 			</tr>
 		</tbody>
-	</table>
+	</table> -->
 </div>
-<footer class="footer mt-20">
-	<div class="container">
-		<p>感谢jQuery、layer、laypage、Validform、UEditor、My97DatePicker、iconfont、Datatables、WebUploaded、icheck、highcharts、bootstrap-Switch<br>
-			Copyright &copy;2015-2017 H-ui.admin v3.1 All Rights Reserved.<br>
-			本后台系统由<a href="http://www.h-ui.net/" target="_blank" title="H-ui前端框架">H-ui前端框架</a>提供前端技术支持</p>
-	</div>
-</footer>
 <script type="text/javascript" src="{{asset('admins')}}/lib/jquery/1.9.1/jquery.min.js"></script> 
 <script type="text/javascript" src="{{asset('admins')}}/static/h-ui/js/H-ui.min.js"></script> 
-<!--此乃百度统计代码，请自行删除-->
-<script>
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?080836300300be57b7f34f4b3e97d911";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
-})();
-</script>
-<!--/此乃百度统计代码，请自行删除-->
 </body>
 </html>

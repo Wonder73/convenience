@@ -70,7 +70,6 @@
             label = "所属栋"
             align = "center" 
             min-width = "85"
-            fixed = "left"
             sortable = "custom"
           >
             <template slot-scope="scope">
@@ -192,7 +191,6 @@
             prop = "complete_pay"
             align = "center"
             min-width = "110" 
-            fixed = "right"
             sortable = "custom"
           >
             <template slot-scope="scope">

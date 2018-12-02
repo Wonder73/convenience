@@ -401,7 +401,7 @@ and open the template in the editor.
                 <li :class="{active: showMain == 0}" @click="showMain = 0">账号与安全</li>
                 <li :class="{active: showMain == 1}" @click="showPayConfig">支付设置</li>
                 <li :class="{active: showMain == 2}" @click="showMain = 2">修改密码</li>
-                <li :class="{active: showMain == 3}" @click="showMain = 3">关于优便</li>
+                <!-- <li :class="{active: showMain == 3}" @click="showMain = 3">关于优便</li> -->
                 <li @click="logout">退出登录</li>
             </ul>
             <i :class="{'el-icon-d-arrow':true, 'el-icon-d-arrow-right': true, 'active': slideSide}" @click="slideSide = !slideSide"></i>
@@ -582,6 +582,8 @@ and open the template in the editor.
             //alert(input);
 
         }
+
+       
     </script>
 </body>
 
