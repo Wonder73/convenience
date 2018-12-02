@@ -1,3 +1,4 @@
+<link rel="shortcut icon" href="{{asset('/favicon.ico')}}" type="image/x-icon"/>
 <link rel="stylesheet" href="{{asset('css/reset.css')}}" />
 <link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet">
 <link href="{{asset('css/font-awesome.min.css')}}" rel="stylesheet">

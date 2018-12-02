@@ -12,7 +12,7 @@ class Pay extends Model
 {
     protected $table = 'pay';
     protected $primarykey = 'id';
-    protected $fillable = ['money', 'error_count', 'cooling_date'];
+    protected $fillable = ['user_id', 'pay_password', 'salt', 'money', 'error_count', 'cooling_date'];
 
     public $timestamps = false;
 
@@ -170,5 +170,53 @@ class Pay extends Model
 
     }
     
+    //充值
+    public function topUp($data) {
+        $userIdentity = new UserIdentity();
+        $utilities = new Utilities();
+        $aa = new AA();
+        $message = ["type" => false, "info" => ""];   //返回的数据
+
+        $primaryData = ['logisticsUserId' => $data['payUserId'], 'cost' => $data['cost'], 'type' => $data['type']];       //储存一下必要数据
+
+        if($res = $this -> topUpMoney($primaryData)){
+            $message['type'] = true;
+            $message['info'] = "支付成功！！！";
+        }else {
+            if($res){
+                $message['type'] = false;
+                $message['info'] = "支付失败，请检查网络是否正常！！！";
+            }else {
+                $message['type'] = false;
+                $message['info'] = "支付失败，余额不足！！！";
+            }
+        }
+
+        return $message;
+    }
+
+    public function topUpMoney($data) {
+        $consume = new Consume();
+        $info = Pay::where('user_id', $data['logisticsUserId']) -> first();
+
+        if($info){
+            $info -> money += $data['cost'];
+            $info -> save();
+
+            //记录
+            $organization = $data['type'] == '0'? '充值': ($data['type'] == '1'? '提现': '充值');
+            $consume -> insertConsume([
+                'user_id' => $data['logisticsUserId'], 
+                'pay_user_id' => 0, 
+                'organization' => $organization,
+                'consume_type' => 1,
+                'consume_cost' => $data['cost'],
+            ]);
+
+            return true;
+        }else {
+            return false;
+        }
+    }
 
 }

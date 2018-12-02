@@ -26,10 +26,10 @@ class IndexController extends Controller
         if($request -> hasFile('file') && $file -> isValid('file')){
             $ext = $file -> getClientOriginalExtension();
             $filename = uniqid().Date('Y-m-d-H-i-s'). '.' . $ext;
-            $file -> move('./uploads', $filename);
+            $file -> move('./uploads/excel', $filename);
             
             //解析excel，并写入数据库
-            $create_path = './uploads/'.$filename;
+            $create_path = './uploads/excel/'.$filename;
             Excel::load($create_path, function ($reader) use ($utilities, $category){
                 $reader->ignoreEmpty();
                 $data = $reader->all()->toArray();

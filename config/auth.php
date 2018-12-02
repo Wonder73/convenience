@@ -45,6 +45,17 @@ return [
             'driver' => 'token',
             'provider' => 'users',
         ],
+
+         //新建一个登录验证的功能
+        'home' => [
+            'driver' => 'session',
+            'provider' => 'def',
+        ],
+        //新建一个登录验证的功能
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'abc',
+        ],
     ],
 
     /*
@@ -65,15 +76,19 @@ return [
     */
 
     'providers' => [
-        'users' => [
+        'abc' => [
             'driver' => 'eloquent',
-            'model' => App\User::class,
+            'model' => App\Admin::class,
         ],
 
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',
         // ],
+        'users' => [
+            'driver' => 'eloquent',
+            'model' => App\User::class,
+        ],
     ],
 
     /*

@@ -18,6 +18,9 @@ class User extends Model
     public function user_identity (){
         return $this -> hasOne('App\Http\Models\Client\Index\UserIdentity', 'user_id', 'id');
     }
+    public function user_info (){
+        return $this -> hasOne('App\Http\Models\Client\Index\UserInfo', 'user_id', 'id');
+    }
 
     //用户身份验证
     public function checkIdentity($data, $roleId){

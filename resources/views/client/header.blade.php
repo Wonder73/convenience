@@ -3,7 +3,7 @@
     <div class="container-fluid">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#example-navbar-collapse"> <span class="sr-only">切换导航</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-        <b>Hi~欢迎使用优便校园</b> </div>
+        <b><a href="{{asset('.')}}">Hi~欢迎使用优便校园</a></b> </div>
       <div class="collapse navbar-collapse" id="example-navbar-collapse">
         <ul class="nav navbar-nav navbar-right">
           <li id="login_reg_btn"> <a href="#">登录/注册</a> </li>
